@@ -70,3 +70,9 @@
 .title ~ .logoutIcon {
     margin-left: 5px;
 }
+.loginIcon,
+.logoutIcon {
+    display: inline-block;
+    text-align: center;
+    width: 24px;
+}
