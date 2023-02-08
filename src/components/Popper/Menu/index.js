@@ -30,7 +30,6 @@ function Menu({ children, items = [], onChange = () => {} }) {
             );
         });
     };
-
     return (
         <Tippy
             interactive
@@ -44,6 +43,7 @@ function Menu({ children, items = [], onChange = () => {} }) {
                             <Header
                                 title={'Language'}
                                 onBack={() => {
+                                    //cắt mảng ko bao gồm phần tử cuối
                                     setHistory(history.slice(0, history.length - 1));
                                 }}
                             />
