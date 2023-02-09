@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children, items = [], onChange = () => {} }) {
+function Menu({ children, items = [], onChange = () => {}, hideOnClick = false }) {
     //các cấp object
     const [history, setHistory] = useState([{ data: items }]);
     //lấy giá trị cuối, nếu có children thì sẽ lấy children
@@ -33,6 +33,7 @@ function Menu({ children, items = [], onChange = () => {} }) {
     return (
         <Tippy
             interactive
+            hideOnClick={hideOnClick} //ẩn khi click
             offset={[16, 8]} //ngang vs cao
             delay={[0, 700]}
             placement="bottom-end"
@@ -48,7 +49,7 @@ function Menu({ children, items = [], onChange = () => {} }) {
                                 }}
                             />
                         )}
-                        {renderItems()}
+                        <div className={cx('menu-scroll')}>{renderItems()}</div>
                     </PopperWrapper>
                 </div>
             )}
