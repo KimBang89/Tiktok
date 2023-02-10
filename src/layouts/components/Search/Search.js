@@ -20,22 +20,22 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
-    const debounce = useDebounce(searchvalue, 300); //truyền value vào debounce , debounce trả về value sau delay s
+    const debounceValue = useDebounce(searchvalue, 300); //truyền value vào debounceValue , debounceValue trả về value sau delay s
     //
     useEffect(() => {
         //value input not empty mới được xử lý
-        if (!debounce.trim()) {
+        if (!debounceValue.trim()) {
             setSearchResult([]);
             return;
         }
         const fetchAPI = async () => {
             setLoading(true);
-            const result = await searchService.search(debounce);
+            const result = await searchService.search(debounceValue);
             setSearchResult(result);
             setLoading(false);
         };
         fetchAPI();
-    }, [debounce]);
+    }, [debounceValue]);
     //
     const handleClear = () => {
         setSearchValue('');
