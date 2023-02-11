@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import AccountItem from '~/components/AccountItem';
 
-function SearchResult({ acountItems }) {
+function SearchResult({ accountItems }) {
     //
-    return acountItems.map((result) => {
+    return accountItems.map((result) => {
         return <AccountItem key={result.id} data={result} />;
     });
 }

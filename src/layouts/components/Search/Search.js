@@ -20,7 +20,8 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
-    const debounceValue = useDebounce(searchvalue, 300); //truyền value vào debounceValue , debounceValue trả về value sau delay s
+    //truyền value vào debounceValue , debounceValue trả về value sau delay s
+    const debounceValue = useDebounce(searchvalue, 300);
     //
     useEffect(() => {
         //value input not empty mới được xử lý
@@ -59,7 +60,7 @@ function Search() {
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper>
                             <h4 className={cx('search-title')}>Account</h4>
-                            <SearchResults acountItems={searchResult} />
+                            <SearchResults accountItems={searchResult} />
                         </PopperWrapper>
                     </div>
                 )}
