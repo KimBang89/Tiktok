@@ -4,6 +4,7 @@ import styles from './Sidebar.module.scss';
 import config from '~/config';
 import Menu, { MenuItem } from './Menu';
 import * as icons from '~/components/icons';
+import SuggestedAccounts from '~/components/SuggestedAccount/SuggestedAccounts';
 //
 const cx = classNames.bind(styles);
 //
@@ -30,6 +31,8 @@ function Sidebar() {
                     activeIcon={<icons.LiveIconActive />}
                 />
             </Menu>
+            <SuggestedAccounts label="Suggested accounts" />
+            <SuggestedAccounts label="Following accounts" />
         </aside>
     );
 }
