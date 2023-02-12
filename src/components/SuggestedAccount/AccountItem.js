@@ -2,18 +2,20 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountPreview from './AccountPreview/AccountPreview';
 import styles from './SuggestedAccounts.module.scss';
+import Image from '../images/images';
 
 const cx = classNames.bind(styles);
-function SuggestedAccounts() {
+function SuggestedAccounts({ data }) {
     const renderPreview = ({ props }) => {
         return (
             <div className={cx('preview')} tabIndex="-1" {...props}>
                 <PopperWrapper>
-                    <AccountPreview />
+                    <AccountPreview data={data} />
                 </PopperWrapper>
             </div>
         );
@@ -22,22 +24,20 @@ function SuggestedAccounts() {
         <div>
             <Tippy interactive delay={[500, 50]} offset={[-20, 0]} placement="bottom" render={renderPreview}>
                 <div className={cx('account-item')}>
-                    <img
-                        className={cx('avatar')}
-                        src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/58b93986bef46431cdadb10e5d74f8e7~c5_100x100.jpeg?x-expires=1676275200&x-signature=neWC%2F9suVSKMoOOgYl%2BrKPnrL6g%3D"
-                        alt="avatar"
-                    />
+                    <Image className={cx('avatar')} src={data.avatar} alt={data.first_name + data.last_name} />
                     <div className={cx('item-info')}>
                         <p className={cx('nickname')}>
-                            <strong>tiktok_award_offical</strong>
-                            <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />
+                            <strong>{data.nickname}</strong>
+                            {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
                         </p>
-                        <p className={cx('name')}>Tiktok_Offical</p>
+                        <p className={cx('name')}>{data.first_name + data.last_name}</p>
                     </div>
                 </div>
             </Tippy>
         </div>
     );
 }
-
+AccountPreview.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 export default SuggestedAccounts;
