@@ -15,11 +15,16 @@ const PER_PAGE = 5;
 function Sidebar() {
     const [page, setPage] = useState(INIT_PAGE);
     const [suggestedUsers, setSuggestedUsers] = useState([]);
+    const [followers, setFollowers] = useState([]);
     //
     useEffect(() => {
         const fetchAPI = async () => {
-            let data = await userService.getSuggested({ page, perPage: PER_PAGE });
-            setSuggestedUsers((prev) => [...prev, ...data]);
+            try {
+                let data = await userService.getSuggested({ page, perPage: PER_PAGE });
+                setSuggestedUsers((prev) => [...prev, ...data]);
+            } catch (error) {
+                console.log(error);
+            }
         };
         fetchAPI();
         // userService
@@ -27,9 +32,17 @@ function Sidebar() {
         //     .then((data) => setSuggestedUsers((prev) => [...prev, ...data]))
         //     .catch((err) => console.log(err));
     }, [page]);
+    useEffect(() => {
+        const fetchAPI = async () => {
+            const data = await userService.getFollowing();
+            setFollowers(data);
+        };
+        fetchAPI();
+    }, []);
     const handleSeeAll = () => {
         setPage(page + 1);
     };
+
     return (
         <aside className={cx('wrapper')}>
             <Menu>
@@ -52,8 +65,9 @@ function Sidebar() {
                     activeIcon={<icons.LiveIconActive />}
                 />
             </Menu>
-            <SuggestedAccounts label="Suggested accounts" data={suggestedUsers} onSeeAll={handleSeeAll} />
-            {/* <SuggestedAccounts label="Following accounts" data={suggestedUsers} /> */}
+
+            <SuggestedAccounts label="Suggested accounts" data={suggestedUsers} onSeeAll={handleSeeAll} show={true} />
+            <SuggestedAccounts label="Following accounts" data={followers} show={false} />
         </aside>
     );
 }

@@ -10,7 +10,9 @@ import styles from './SuggestedAccounts.module.scss';
 import Image from '../images/images';
 
 const cx = classNames.bind(styles);
-function SuggestedAccounts({ data }) {
+function SuggestedAccounts({ data, show }) {
+    console.log(show);
+    //
     const renderPreview = ({ props }) => {
         return (
             <div className={cx('preview')} tabIndex="-1" {...props}>
@@ -22,7 +24,14 @@ function SuggestedAccounts({ data }) {
     };
     return (
         <div>
-            <Tippy interactive delay={[500, 50]} offset={[-20, 0]} placement="bottom" render={renderPreview}>
+            <Tippy
+                disabled={!show}
+                interactive
+                delay={[500, 50]}
+                offset={[-20, 0]}
+                placement="bottom"
+                render={renderPreview}
+            >
                 <div className={cx('account-item')}>
                     <Image className={cx('avatar')} src={data.avatar} alt={data.first_name + data.last_name} />
                     <div className={cx('item-info')}>
@@ -39,5 +48,6 @@ function SuggestedAccounts({ data }) {
 }
 AccountPreview.propTypes = {
     data: PropTypes.object.isRequired,
+    show: PropTypes.bool,
 };
 export default SuggestedAccounts;

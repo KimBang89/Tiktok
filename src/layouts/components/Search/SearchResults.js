@@ -1,10 +1,11 @@
 import { memo } from 'react';
 import AccountItem from '~/components/AccountItem';
 
-const SearchResult = memo(({ accountItems }) => {
+function SearchResult({ accountItems }) {
     //
     return accountItems.map((result) => {
         return <AccountItem key={result.id} data={result} />;
     });
-});
-export default SearchResult;
+}
+
+export default memo(SearchResult);
